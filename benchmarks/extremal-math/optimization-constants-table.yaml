@@ -1,0 +1,10 @@
+id: optimization-constants-table
+title: "Crowdsourced table of optimization constants (Tao et al.)"
+domain: extremal-math
+kind: public-suite
+url: "https://github.com/teorth/optimizationproblems"
+size: "About 120 constants, each with dated upper and lower bounds and their sources"
+measures: ["best certified lower bound", "best certified upper bound", "verification status (asterisk)"]
+protocol: "A bound counts when its certificate is replayed; the table marks rows awaiting an independent replay with an asterisk. Bounds are recorded as histories; see the repository's CONTRIBUTING.md."
+access: "Public GitHub repository; certificates are linked from each row."
+as_of: "2026-11-22"

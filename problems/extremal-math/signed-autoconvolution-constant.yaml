@@ -1,0 +1,36 @@
+id: signed-autoconvolution-constant
+title: "Signed autoconvolution constant (third autocorrelation inequality, signed variant)"
+domain: extremal-math
+as_of: "2026-11-22"
+
+statement: >
+  Find the largest C such that max_t |f*f(t)| >= C (integral of f)^2 for every real-valued f
+  supported on [-1/4, 1/4]. Any explicit f gives an upper bound; a proof gives a lower bound.
+
+used_in:
+  - "Additive combinatorics: size bounds for generalized Sidon sets via suprema of autoconvolutions"
+  - "Benchmark problem for AI-driven search (AlphaEvolve problem list, SwarmEvolve, SCiEL)"
+
+benchmarks:
+  - extremal-math/optimization-constants-table
+
+state_of_the_art:
+  - method: "Step function, 800 cells (SCiEL), on the table with an asterisk"
+    result: "C <= 1.457854884921989"
+    source: "https://github.com/teorth/optimizationproblems/blob/main/constants/1d.md"
+    as_of: "2026-11-22"
+  - method: "Step function, 102,400 cells (public certificate, not yet on the table)"
+    result: "C <= 1.4513064006879361"
+    source: "https://github.com/cweill/c1d-upper-bound"
+    as_of: "2026-11-22"
+  - method: "Proof with Lean formalization (public repository, not yet on the table)"
+    result: "C > 4/3 claimed; the table still lists the trivial bound 1"
+    source: "https://github.com/tejasvi/autocorrelation-lower-bounds"
+    as_of: "2026-11-22"
+
+pain_points:
+  - "Upper-bound records change within days; new certificates outrun independent checking."
+  - "Rows wait for a second, independent replay before their asterisk is removed."
+  - "The gap between lower bound (trivial 1 on the table) and upper bound (about 1.45) is wide."
+
+open_dimensions: [verifiability, quality]

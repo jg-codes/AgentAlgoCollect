@@ -1,0 +1,24 @@
+id: certificate-replays
+title: "Independent replays of published bound certificates"
+domain: extremal-math
+track: theory
+problem_card: extremal-math/signed-autoconvolution-constant
+status: proposed
+date: "2026-11-22"
+
+problem: >
+  Records for open constants are now produced faster than they are checked; the public table of
+  optimization constants marks rows that wait for an independent replay. A record that nobody has
+  re-derived is a claim, not a bound.
+claim: >
+  An exact-arithmetic checker written without reading the claimant's code reproduces each
+  certificate it is given to the last digit, or finds the error.
+
+plan:
+  benchmark: "Rows of extremal-math/optimization-constants-table that carry an asterisk or are pending a second party, plus public certificates not yet on the table"
+  baseline: "The claimant's own verifier and the value printed in the claim"
+  refuted_if: "Our checker and the claimant's verifier disagree and our checker is shown to be wrong"
+
+authors:
+  - name: "Johannes Gast"
+ai_assistance: "Proposal and checker drafted by an AI agent (Claude, via Claude Code) under the author's direction."
