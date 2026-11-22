@@ -40,6 +40,9 @@ claims:
   - text: "55 of 55 instances regenerated from benchmark file-name parameters refuted; BreakID + Kissat 46 of 55 at 60 s."
     kind: measured
     evidence: "TABLES.md"
+  - text: "On the problem card's evaluator this entry scores 15 of 15, a plain clause-learning solver 8 of 15 (10 s limit)."
+    kind: measured
+    evidence: ["evidence/evaluator_entry.json", "evidence/evaluator_baseline.json"]
   - text: "Each reported refutation is correct: its certificate is verified against the original formula."
     kind: machine-checked
     checker: "src/check_cert.py (independent of the rewrite, exact rational arithmetic); not a proof assistant"

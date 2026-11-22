@@ -17,4 +17,6 @@ state_of_the_art:
 
 pain_points: []             # what remains hard
 
+# evaluator: evaluators/<domain>/<name>.py   # optional: scores any candidate automatically
+
 open_dimensions: []         # from: speed, quality, robustness, generality, simplicity, efficiency, verifiability

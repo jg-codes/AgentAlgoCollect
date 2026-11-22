@@ -38,4 +38,6 @@ pain_points:
   - "Solvers with native counting reasoning do not always recover the constraints from clausal input (Elffers and Nordstrom report relativized pigeonhole as a failure case)."
   - "Solvers built for one family are not designed to transfer to other formulas."
 
+evaluator: evaluators/sat-pb/hidden_counting_in_clauses.py
+
 open_dimensions: [robustness, generality, verifiability, speed]

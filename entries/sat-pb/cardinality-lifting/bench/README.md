@@ -16,6 +16,7 @@ and are not a one-command pipeline.
 | `exact_option_sweep.jsonl` | `exact_sweep.py` | Exact |
 | `scip_raw_vs_lifted.jsonl`, `cpsat_raw_vs_lifted.jsonl` | `scip_compare.py`, `cpsat_compare.py` | PySCIPOpt, OR-Tools |
 | `results.csv`, `php_mchess_lifted_exact.log` | `../src/baselines.py run`, an early clique-only prototype | Exact, PySAT, OR-Tools |
+| `evaluator_entry.json`, `evaluator_baseline.json` | `evaluators/sat-pb/hidden_counting_in_clauses.py` on `candidate.py` and on the baseline candidate | Exact, PySAT |
 | `../TABLES.md` | `summarize.py` (reads only `../evidence/`) | none |
 
 Versions used: Kissat 4.0.4, BreakID commit 1a022d0, Exact 2.2.1 (PyPI wheel, built without its LP

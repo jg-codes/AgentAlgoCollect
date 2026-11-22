@@ -31,7 +31,8 @@ The registry has three layers:
 
 - A **problem card** (`problems/<domain>/<problem>.yaml`) describes one problem: where the
   algorithm is used, which benchmarks apply, the current state of the art with sources and dates,
-  and what remains hard.
+  and what remains hard. A card can come with an **evaluator** that scores any candidate method
+  automatically, which turns the card into an open challenge (an idea taken from AlphaEvolve).
 - An **entry** (`entries/<domain>/<entry>/`) is one attempt at a problem. It names its track,
   its problem card and its benchmark, says which dimension it improves (speed, quality, robustness, generality, simplicity,
   efficiency, verifiability) and reports one flagship result against a named baseline.
@@ -64,9 +65,9 @@ is offered to the original project.
 <!-- registry:start -->
 ### Problems
 
-| Problem | Domain | Benchmarks | Open dimensions | Entries |
-|---|---|---|---|---|
-| [Refuting counting arguments hidden in clausal form](problems/sat-pb/hidden-counting-in-clauses.yaml) | sat-pb | gbd-relativized-pigeon-hole, perturbed-relativized-pigeonhole, pb-competition-2025 | robustness, generality, verifiability, speed | 2 |
+| Problem | Domain | Benchmarks | Open dimensions | Evaluator | Entries |
+|---|---|---|---|---|---|
+| [Refuting counting arguments hidden in clausal form](problems/sat-pb/hidden-counting-in-clauses.yaml) | sat-pb | gbd-relativized-pigeon-hole, perturbed-relativized-pigeonhole, pb-competition-2025 | robustness, generality, verifiability, speed | yes | 3 |
 
 ### Benchmarks
 
@@ -88,7 +89,7 @@ No entries yet.
 
 | Entry | Status | Improves | Flagship result | Claims | Gate |
 |---|---|---|---|---|---|
-| [Counting where symmetry breaking fails: certified refutation of pigeonhole-type formulas](entries/sat-pb/cardinality-lifting/) | candidate | robustness, verifiability | Relativized pigeonhole, 15% of options forbidden at random (22 instances, 60 s): 22/22 refuted (max 2.01 s), all certified in a separate step vs BreakID + Kissat 4.0.4: 0/22 | 2 measured, 1 machine-checked, 2 argued | 3/7 |
+| [Counting where symmetry breaking fails: certified refutation of pigeonhole-type formulas](entries/sat-pb/cardinality-lifting/) | candidate | robustness, verifiability | Relativized pigeonhole, 15% of options forbidden at random (22 instances, 60 s): 22/22 refuted (max 2.01 s), all certified in a separate step vs BreakID + Kissat 4.0.4: 0/22 | 3 measured, 1 machine-checked, 2 argued | 3/7 |
 
 ### Results: engineering
 
@@ -99,6 +100,7 @@ No entries yet.
 | Proposal | Track | Planned benchmark | Refuted if |
 |---|---|---|---|
 | [Does the hidden conditional-counting pattern occur in real-world instances?](entries/sat-pb/product-extension-in-practice/) | applied | Application tracks of recent SAT and pseudo-Boolean competitions; MIPLIB 0-1 models | The rule applies to under 1% of instances, or no instance changes outcome |
+| [Evolutionary code search against a role-separated agent workflow, on the same evaluator](entries/sat-pb/search-process-comparison/) | applied | evaluators/sat-pb/hidden_counting_in_clauses.py, plus fresh seeds not seen during the search | Evolutionary search reaches an equal or higher score on fresh seeds in at least 2 of 3 runs |
 <!-- registry:end -->
 
 "Claims" counts the claims of each kind; "Gate" counts the criteria an entry currently meets.
@@ -114,6 +116,7 @@ entries/<domain>/<entry>/          one self-contained folder per attempt
   README.md                        problem, result, method, reproduction, limits
   src/ tests/ bench/               method, tests, benchmark drivers
   evidence/                        raw run files and machine stamps
+evaluators/<domain>/<name>.py      automatic scoring of candidates for a problem card
 AGENTS.md  agents/  skills/        instructions, role definitions and procedures for AI agents
 tools/                             gate checker, registry generator, privacy scanner, machine stamp
 templates/                         starting points for benchmark cards, problem cards and entries

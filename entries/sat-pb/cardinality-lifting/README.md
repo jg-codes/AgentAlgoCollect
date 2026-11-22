@@ -29,6 +29,10 @@ files**: three carry names that GBD lists as satisfiable, while our regenerated 
 unsatisfiable, so at least that sub-family differs from the originals.
 All tables: [TABLES.md](TABLES.md), generated from `evidence/` by `bench/summarize.py`.
 
+Scored by the problem card's evaluator (15 seeded instances, 10 s each, wrong answers void the
+score): this entry 15 of 15, a plain clause-learning solver 8 of 15
+(`evidence/evaluator_entry.json`, `evidence/evaluator_baseline.json`).
+
 ## Method
 
 Three rewrite rules that keep the formula equivalent and contain no family-specific code:

@@ -188,6 +188,8 @@ def check_problem(path: Path, p: Entry) -> list[str]:
     bad = [d for d in p["open_dimensions"] if d not in DIMENSIONS]
     if bad:
         errs.append(f"open_dimensions {bad} not in {DIMENSIONS}")
+    if p.get("evaluator") and not (ROOT / p["evaluator"]).exists():
+        errs.append(f"evaluator not found: {p['evaluator']}")
     return errs
 
 
@@ -331,8 +333,8 @@ def _backing(e: Entry) -> str:
 
 def table(entries: list[tuple[Path, Entry]]) -> str:
     probs = [
-        "| Problem | Domain | Benchmarks | Open dimensions | Entries |",
-        "|---|---|---|---|---|",
+        "| Problem | Domain | Benchmarks | Open dimensions | Evaluator | Entries |",
+        "|---|---|---|---|---|---|",
     ]
     for path, p in load_problems():
         key = f"{p['domain']}/{p['id']}"
@@ -340,7 +342,7 @@ def table(entries: list[tuple[Path, Entry]]) -> str:
         probs.append(
             f"| [{p['title']}]({path.relative_to(ROOT).as_posix()}) | {p['domain']} | "
             f"{', '.join(r.split('/')[-1] for r in p['benchmarks'])} | "
-            f"{', '.join(p['open_dimensions'])} | {n_e} |"
+            f"{', '.join(p['open_dimensions'])} | {'yes' if p.get('evaluator') else 'no'} | {n_e} |"
         )
     out = "### Problems\n\n" + "\n".join(probs)
     cat = ["| Benchmark | Domain | Kind | Measures | Protocol |", "|---|---|---|---|---|"]

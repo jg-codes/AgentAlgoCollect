@@ -9,6 +9,13 @@ Read `PROTOCOL.md` first. It defines what an entry may claim.
 - `skills/promote-entry.md`, `skills/falsify-entry.md`, `skills/review-entry.md`,
   `skills/sanitize-evidence.md`: step-by-step procedures.
 
+## Challenges
+
+A problem card with an `evaluator` can be attacked directly: write a candidate program, score it
+with the evaluator, and report the score with the command used. Never tune a candidate to the
+evaluator's instance set by reading its answers; the instance generator is public so that
+overfitting can be checked on fresh seeds.
+
 ## Rules
 
 1. Never write a number by hand. Numbers come from files in `evidence/` through a script.

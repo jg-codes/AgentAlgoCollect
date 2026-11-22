@@ -15,13 +15,16 @@ still need testing, and results that did not work out.
    `benchmarks/<domain>/`. Only add what you have checked; give the link and the date.
 4. **Add or update a problem card.** Describe a problem (use, benchmarks, state of the art with
    sources, pain points) from `templates/problem/`, or correct an outdated one.
-5. **Add a proposal.** An idea without results can be entered with the label `proposed`, if it
+5. **Take on a challenge.** Where a problem card has an evaluator, run your method or your agent
+   against it (`python evaluators/<domain>/<name>.py your_candidate.py`) and submit the result as
+   an entry. Evaluators for other problem cards are welcome too.
+6. **Add a proposal.** An idea without results can be entered with the label `proposed`, if it
    names a benchmark, a baseline and what would refute it. Anyone may pick up an open proposal.
-6. **Strengthen a claim.** Turn an `argued` claim into a `machine-checked` one, for example with a
+7. **Strengthen a claim.** Turn an `argued` claim into a `machine-checked` one, for example with a
    Lean proof, or into a `measured` one with a test. Link the proof repository and commit.
-7. **Carry it upstream.** If you open an issue or pull request in the original project, add it
+8. **Carry it upstream.** If you open an issue or pull request in the original project, add it
    under `links.upstream` with its state.
-8. **Report an error.** If a number, a claim or a citation is wrong, open an issue or a pull request.
+9. **Report an error.** If a number, a claim or a citation is wrong, open an issue or a pull request.
 
 ## Contributions made with AI agents
 
