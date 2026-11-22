@@ -67,6 +67,7 @@ is offered to the original project.
 
 | Problem | Domain | Benchmarks | Open dimensions | Evaluator | Entries |
 |---|---|---|---|---|---|
+| [Signed autoconvolution constant (third autocorrelation inequality, signed variant)](problems/extremal-math/signed-autoconvolution-constant.yaml) | extremal-math | optimization-constants-table | verifiability, quality | no | 1 |
 | [Refuting counting arguments hidden in clausal form](problems/sat-pb/hidden-counting-in-clauses.yaml) | sat-pb | gbd-relativized-pigeon-hole, perturbed-relativized-pigeonhole, pb-competition-2025 | robustness, generality, verifiability, speed | yes | 3 |
 
 ### Benchmarks
@@ -75,6 +76,7 @@ is offered to the original project.
 |---|---|---|---|---|
 | [MIPLIB 2017](benchmarks/combinatorial-optimization/miplib-2017.yaml) | combinatorial-optimization | public-suite | instances solved within the time limit; time to optimality; gap to best known | Instances are tagged easy (solved within one hour by an out-of-the-box solver), hard or open. |
 | [OR-Library](benchmarks/combinatorial-optimization/or-library.yaml) | combinatorial-optimization | public-suite | objective value; gap to best known; time to best solution | None fixed by the library; state limits, hardware and the best-known values used. |
+| [Crowdsourced table of optimization constants (Tao et al.)](benchmarks/extremal-math/optimization-constants-table.yaml) | extremal-math | public-suite | best certified lower bound; best certified upper bound; verification status (asterisk) | A bound counts when its certificate is replayed; the table marks rows awaiting an independent replay with an asterisk. Bounds are recorded as histories; see the repository's CONTRIBUTING.md. |
 | [kvpress evaluation suite and leaderboard](benchmarks/machine-learning/kvpress-evaluation.yaml) | machine-learning | public-suite | task accuracy at a given compression ratio; peak memory; total time | See evaluation/README.md in the repository; state model, dataset, context length and compression ratio. |
 | [GBD family relativized-pigeon-hole](benchmarks/sat-pb/gbd-relativized-pigeon-hole.yaml) | sat-pb | public-suite | instances solved within the time limit; PAR-2 score; proof or certificate produced | Per the SAT Competition year the instances come from; state the limit used. |
 | [Pseudo-Boolean Competition 2025](benchmarks/sat-pb/pb-competition-2025.yaml) | sat-pb | public-suite | instances solved within the time limit; certificate validated by VeriPB | Sequential solvers: 1 h CPU time and 31 GB RAM per job. Certificates in VeriPB format. |
@@ -99,6 +101,7 @@ No entries yet.
 
 | Proposal | Track | Planned benchmark | Refuted if |
 |---|---|---|---|
+| [Independent replays of published bound certificates](entries/extremal-math/certificate-replays/) | theory | Rows of extremal-math/optimization-constants-table that carry an asterisk or are pending a second party, plus public certificates not yet on the table | Our checker and the claimant's verifier disagree and our checker is shown to be wrong |
 | [Does the hidden conditional-counting pattern occur in real-world instances?](entries/sat-pb/product-extension-in-practice/) | applied | Application tracks of recent SAT and pseudo-Boolean competitions; MIPLIB 0-1 models | The rule applies to under 1% of instances, or no instance changes outcome |
 | [Evolutionary code search against a role-separated agent workflow, on the same evaluator](entries/sat-pb/search-process-comparison/) | applied | evaluators/sat-pb/hidden_counting_in_clauses.py, plus fresh seeds not seen during the search | Evolutionary search reaches an equal or higher score on fresh seeds in at least 2 of 3 runs |
 <!-- registry:end -->
