@@ -1,0 +1,102 @@
+{
+  "combined_score": 0.5333333333333333,
+  "solved": 8,
+  "solved_unsat": 5,
+  "solved_sat": 3,
+  "instances": 15,
+  "wrong_answers": 0,
+  "par2_seconds": 10.053,
+  "time_limit_seconds": 10.0,
+  "rows": [
+    {
+      "instance": "unsat_p5_r8_s1",
+      "expected": "UNSATISFIABLE",
+      "answer": "UNSATISFIABLE",
+      "seconds": 0.405
+    },
+    {
+      "instance": "unsat_p5_r8_s2",
+      "expected": "UNSATISFIABLE",
+      "answer": "UNSATISFIABLE",
+      "seconds": 0.072
+    },
+    {
+      "instance": "unsat_p6_r10_s1",
+      "expected": "UNSATISFIABLE",
+      "answer": "UNSATISFIABLE",
+      "seconds": 0.235
+    },
+    {
+      "instance": "unsat_p6_r10_s2",
+      "expected": "UNSATISFIABLE",
+      "answer": "UNSATISFIABLE",
+      "seconds": 0.303
+    },
+    {
+      "instance": "unsat_p8_r12_s1",
+      "expected": "UNSATISFIABLE",
+      "answer": "TIMEOUT",
+      "seconds": 10.0
+    },
+    {
+      "instance": "unsat_p8_r12_s2",
+      "expected": "UNSATISFIABLE",
+      "answer": "TIMEOUT",
+      "seconds": 10.0
+    },
+    {
+      "instance": "unsat_p10_r10_s1",
+      "expected": "UNSATISFIABLE",
+      "answer": "UNSATISFIABLE",
+      "seconds": 9.646
+    },
+    {
+      "instance": "unsat_p10_r10_s2",
+      "expected": "UNSATISFIABLE",
+      "answer": "TIMEOUT",
+      "seconds": 10.0
+    },
+    {
+      "instance": "unsat_p12_r16_s1",
+      "expected": "UNSATISFIABLE",
+      "answer": "TIMEOUT",
+      "seconds": 10.0
+    },
+    {
+      "instance": "unsat_p12_r16_s2",
+      "expected": "UNSATISFIABLE",
+      "answer": "TIMEOUT",
+      "seconds": 10.0
+    },
+    {
+      "instance": "unsat_p16_r16_s1",
+      "expected": "UNSATISFIABLE",
+      "answer": "TIMEOUT",
+      "seconds": 10.0
+    },
+    {
+      "instance": "unsat_p16_r16_s2",
+      "expected": "UNSATISFIABLE",
+      "answer": "TIMEOUT",
+      "seconds": 10.0
+    },
+    {
+      "instance": "sat_p5_r8",
+      "expected": "SATISFIABLE",
+      "answer": "SATISFIABLE",
+      "seconds": 0.042
+    },
+    {
+      "instance": "sat_p8_r12",
+      "expected": "SATISFIABLE",
+      "answer": "SATISFIABLE",
+      "seconds": 0.041
+    },
+    {
+      "instance": "sat_p12_r16",
+      "expected": "SATISFIABLE",
+      "answer": "SATISFIABLE",
+      "seconds": 0.045
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+id: search-process-comparison
+title: "Evolutionary code search against a role-separated agent workflow, on the same evaluator"
+domain: sat-pb
+track: applied
+problem_card: sat-pb/hidden-counting-in-clauses
+status: proposed
+date: "2026-11-22"
+
+problem: >
+  Two ways of letting AI systems improve an algorithm are in use: evolutionary search over programs
+  against an evaluator (AlphaEvolve, OpenEvolve), and an agent workflow with separate builder,
+  falsifier and reviewer roles (this repository). They have not been compared under equal conditions.
+claim: >
+  Starting from the same baseline candidate, with the same language model and the same token
+  budget, the role-separated workflow reaches a higher evaluator score than evolutionary search.
+
+plan:
+  benchmark: "evaluators/sat-pb/hidden_counting_in_clauses.py, plus fresh seeds not seen during the search"
+  baseline: "OpenEvolve with its default settings, started from evaluators/sat-pb/baseline_candidate.py; same model and token budget; 3 runs per arm"
+  refuted_if: "Evolutionary search reaches an equal or higher score on fresh seeds in at least 2 of 3 runs"
+
+authors:
+  - name: "Johannes Gast"
+ai_assistance: "Proposal drafted by an AI agent (Claude, via Claude Code) under the author's direction."

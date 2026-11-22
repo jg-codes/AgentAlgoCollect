@@ -10,6 +10,19 @@ their measures, the state of the art, and the remaining pain points. Every state
 needs a link, or a path in this repository if it was measured here. Every entry names one
 problem card.
 
+## Evaluators
+
+A problem card can name an evaluator: a program that takes any candidate method, runs it on a
+fixed, seeded instance set with known answers, and returns scores. With an evaluator, a problem card
+is an open challenge: people, agents and automated code-search tools can all be measured the same
+way. A wrong answer on any instance sets the score to zero.
+
+Evaluators return a `combined_score` and accept a candidate program path, so they can be used
+unchanged with evolutionary code-search tools such as OpenEvolve. Pairing each problem with an
+automatic evaluator follows AlphaEvolve (Novikov et al., 2025).
+
+An evaluator score supports an entry; it does not replace the entry's benchmark report.
+
 ## Improvement dimensions
 
 An entry lists what it improves, from a fixed list:
