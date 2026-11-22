@@ -1,7 +1,8 @@
 # Contributing
 
 Benchmarked improvements found with AI agents are welcome here. So are improvements found by hand,
-ideas that still need testing, and results that did not work out.
+engineering fixes that make a known algorithm faster, leaner or simpler, benchmarks, ideas that
+still need testing, and results that did not work out.
 
 ## Ways to contribute
 
@@ -9,15 +10,18 @@ ideas that still need testing, and results that did not work out.
    that adds your output and machine details under `evidence/`. This is what confirms an entry.
 2. **Add a result.** Open an "Entry proposal" issue first: the problem, the baseline and the
    benchmark. Then copy `templates/entry/` to `entries/<domain>/<your-entry>/` and open a pull request.
-3. **Add or update a problem card.** Describe a problem (use, benchmarks, state of the art with
+3. **Add a benchmark.** Benchmarks are wanted: public suites, instance sets published with papers,
+   generators, and your own where none exists. Copy `templates/benchmark/` to
+   `benchmarks/<domain>/`. Only add what you have checked; give the link and the date.
+4. **Add or update a problem card.** Describe a problem (use, benchmarks, state of the art with
    sources, pain points) from `templates/problem/`, or correct an outdated one.
-4. **Add a proposal.** An idea without results can be entered with the label `proposed`, if it
+5. **Add a proposal.** An idea without results can be entered with the label `proposed`, if it
    names a benchmark, a baseline and what would refute it. Anyone may pick up an open proposal.
-5. **Strengthen a claim.** Turn an `argued` claim into a `machine-checked` one, for example with a
+6. **Strengthen a claim.** Turn an `argued` claim into a `machine-checked` one, for example with a
    Lean proof, or into a `measured` one with a test. Link the proof repository and commit.
-6. **Carry it upstream.** If you open an issue or pull request in the original project, add it
+7. **Carry it upstream.** If you open an issue or pull request in the original project, add it
    under `links.upstream` with its state.
-7. **Report an error.** If a number, a claim or a citation is wrong, open an issue or a pull request.
+8. **Report an error.** If a number, a claim or a citation is wrong, open an issue or a pull request.
 
 ## Contributions made with AI agents
 
@@ -31,15 +35,25 @@ ideas that still need testing, and results that did not work out.
 
 - One entry per pull request, in one folder. Choose an existing domain folder; propose a new
   domain in the issue if none fits.
+- Choose the track: `theory`, `applied` or `engineering`. Each has its own criteria.
 - New entries start as **proposed**, **candidate** or **negative**. See [PROTOCOL.md](PROTOCOL.md).
 - Mark every claim as `measured`, `machine-checked` or `argued`.
 - Name the problem card and the dimensions the entry improves; report what the gain costs elsewhere.
-- `python tools/gate.py`, `python tools/registry.py --check`, `ruff check .` and `pytest -q` pass.
+- `python tools/scan_sensitive.py`, `python tools/gate.py`, `python tools/registry.py --check`,
+  `ruff check .` and `pytest -q` pass.
 - Keep `evidence/` small (raw result files, not benchmark instances). Fetch or generate large
   files by script and record checksums.
 - State AI assistance in `entry.yaml`. Entries written with AI agents are welcome; unverified
   claims are not.
 - Cite prior work, including work that reduces the novelty of your result.
+
+## Privacy and secrets
+
+Nothing that identifies a person or a machine belongs in this repository: host names, user names,
+home paths, network addresses, serial numbers, e-mail addresses, keys or tokens. Benchmarks need
+the hardware class, so record it with `python tools/stamp.py`, which leaves identity out.
+`tools/scan_sensitive.py` blocks such data at commit time (`pre-commit install`) and on every pull
+request. It reports findings and does not rewrite files, so that evidence is never changed silently.
 
 ## Review
 

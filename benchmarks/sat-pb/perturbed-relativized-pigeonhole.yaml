@@ -1,0 +1,12 @@
+id: perturbed-relativized-pigeonhole
+title: "Relativized pigeonhole with forbidden options"
+domain: sat-pb
+kind: own
+url: "https://github.com/jg-codes/AgentAlgoCollect/tree/main/entries/sat-pb/cardinality-lifting/bench"
+generator: "entries/sat-pb/cardinality-lifting/bench/gen_perturbed.py"
+size: "22 instances in the first use; any size by generator"
+measures: ["instances refuted within the time limit", "certificate verified"]
+protocol: "60 s per instance in the first use; 15% of pigeon-place and place-hole options forbidden, clause order shuffled."
+access: "Generated with CNFgen 0.9.6 by the script above. Shuffling is unseeded."
+adopted_by: []
+as_of: "2026-11-22"

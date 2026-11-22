@@ -1,0 +1,10 @@
+id: pb-competition-2025
+title: "Pseudo-Boolean Competition 2025"
+domain: sat-pb
+kind: public-suite
+url: "https://www.cril.univ-artois.fr/PB25/"
+size: "Satisfaction and optimization tracks, each with and without certificates; an experimental track on parametric families such as pigeonhole"
+measures: ["instances solved within the time limit", "certificate validated by VeriPB"]
+protocol: "Sequential solvers: 1 h CPU time and 31 GB RAM per job. Certificates in VeriPB format."
+access: "See the competition site."
+as_of: "2026-11-22"

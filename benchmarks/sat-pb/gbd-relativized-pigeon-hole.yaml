@@ -1,0 +1,11 @@
+id: gbd-relativized-pigeon-hole
+title: "GBD family relativized-pigeon-hole"
+domain: sat-pb
+kind: public-suite
+url: "https://benchmark-database.de"
+source: "https://arxiv.org/abs/2609.14836"
+size: "55 instances (as counted in the source)"
+measures: ["instances solved within the time limit", "PAR-2 score", "proof or certificate produced"]
+protocol: "Per the SAT Competition year the instances come from; state the limit used."
+access: "Download by instance hash from the Global Benchmark Database."
+as_of: "2026-11-20"

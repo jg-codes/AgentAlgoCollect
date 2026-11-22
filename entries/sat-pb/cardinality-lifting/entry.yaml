@@ -1,6 +1,7 @@
 id: cardinality-lifting
 title: "Counting where symmetry breaking fails: certified refutation of pigeonhole-type formulas"
 domain: sat-pb
+track: applied
 problem_card: sat-pb/hidden-counting-in-clauses
 status: candidate
 version: "0.1.0"
@@ -24,6 +25,13 @@ flagship:
   ours: "22/22 refuted (max 2.01 s), all certified in a separate step"
   evidence: "TABLES.md"
   kind: measured
+  benchmark_id: sat-pb/perturbed-relativized-pigeonhole
+  setup:
+    time_limit: "60 s per instance; for the baseline this includes symmetry breaking"
+    threads: 1
+    hardware: "2-core Intel Xeon 2.1 GHz cloud VM, 8 GB RAM"
+    repeats: "1 for the flagship row; 3 for the 55-instance timings"
+    baseline_settings: "BreakID commit 1a022d0 with default options, then Kissat 4.0.4 with default options"
 
 claims:
   - text: "22 of 22 perturbed instances refuted within 60 s; BreakID + Kissat refutes 0 of 22."
@@ -93,7 +101,7 @@ gate:
     note: "Nobody other than the author has rerun it yet."
 
 limits:
-  - "60 s budgets (including symmetry-breaking time for the baseline), not the 5000 s competition protocol; no long baseline run on the 22 flagship instances."
+  - "60 s budgets (including symmetry-breaking time for the baseline), not a competition-length protocol; no long baseline run on the 22 flagship instances."
   - "The 55 regenerated instances are not the original benchmark files (see gate.real_benchmark_files)."
   - "The perturbation only adds unit clauses; simplifying the formula by unit propagation before the rewrite is untested."
   - "Instance shuffling is unseeded, so regenerated instances differ in order from the ones measured."

@@ -9,6 +9,7 @@
 - [ ] Baseline, budget and hardware named; limits listed; prior work cited
 - [ ] Every claim marked measured, machine-checked or argued
 - [ ] AI assistance stated in `entry.yaml`
+- [ ] `python tools/scan_sensitive.py` passes: no secrets, personal data or machine identifiers
 
 ## Checklist (reviewer)
 - [ ] Flagship number traced from README to evidence file

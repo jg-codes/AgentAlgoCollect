@@ -12,6 +12,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements-dev.txt
+      - run: python tools/scan_sensitive.py
       - run: ruff check .
       - run: ruff format --check .
       - run: python tools/gate.py

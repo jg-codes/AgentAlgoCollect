@@ -7,11 +7,7 @@ statement: ""               # the problem in one paragraph
 
 used_in: []                 # where the algorithm is used and why an improvement matters
 
-benchmarks:
-  - name: ""
-    url: ""
-    kpis: []                # what is measured, e.g. solved within limit, PAR-2, gap to best known
-    protocol: ""            # time limit, threads, hardware class
+benchmarks: []              # ids from the catalog, e.g. sat-pb/pb-competition-2025
 
 state_of_the_art:
   - method: ""

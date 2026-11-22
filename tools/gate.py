@@ -1,6 +1,8 @@
-"""Check every entry against PROTOCOL.md. Exit code 1 if any entry claims more than it shows.
+"""Check every problem card and entry against PROTOCOL.md.
 
-Usage: python tools/gate.py            # check all entries
+Exit code 1 if anything claims more than it shows.
+
+Usage: python tools/gate.py            # check everything
        python tools/gate.py --table    # print the registry tables (used by tools/registry.py)
 """
 
@@ -16,17 +18,52 @@ Entry = dict[str, Any]
 
 ROOT = Path(__file__).resolve().parents[1]
 STATUSES = ("proposed", "candidate", "confirmed", "negative")
-CRITERIA = (
-    "soundness_tests",
-    "public_baseline",
-    "one_command_reproduction",
-    "baseline_coverage",
-    "real_benchmark_files",
-    "second_machine",
-    "independent_reproduction",
-)
-# A candidate must at least be correct, compared fairly and reproducible.
-CANDIDATE_MIN = CRITERIA[:3]
+
+# Each track has its own criteria. The first `minimum` of them are needed for "candidate" or
+# "negative", all of them for "confirmed". `kinds` are the claim kinds a flagship may have.
+TRACKS: dict[str, dict[str, Any]] = {
+    # Cannot be run or benchmarked today (for example quantum or asymptotic results).
+    "theory": {
+        "criteria": (
+            "written_argument",
+            "prior_work_check",
+            "machine_checked_proof",
+            "independent_review",
+        ),
+        "minimum": 2,
+        "kinds": ("argued", "machine-checked"),
+    },
+    # A new or changed algorithm that runs today and is compared on a benchmark.
+    "applied": {
+        "criteria": (
+            "soundness_tests",
+            "public_baseline",
+            "one_command_reproduction",
+            "baseline_coverage",
+            "real_benchmark_files",
+            "second_machine",
+            "independent_reproduction",
+        ),
+        "minimum": 3,
+        "kinds": ("measured", "machine-checked"),
+    },
+    # Same algorithm and results, better implementation or better use of data and hardware.
+    "engineering": {
+        "criteria": (
+            "behaviour_preserved",
+            "public_baseline",
+            "one_command_reproduction",
+            "second_machine",
+            "upstream_offered",
+            "independent_reproduction",
+        ),
+        "minimum": 3,
+        "kinds": ("measured",),
+    },
+}
+# Criteria that must name a person who is not an author.
+BY_OTHERS = ("independent_reproduction", "independent_review")
+
 # How a claim is backed: run by code, checked by a proof checker, or argued in prose only.
 KINDS = ("measured", "machine-checked", "argued")
 LINK_STATES = ("planned", "open", "merged", "declined")
@@ -51,10 +88,25 @@ PROBLEM_FIELDS = (
     "pain_points",
     "open_dimensions",
 )
+BENCH_KINDS = ("public-suite", "paper", "generator", "own")
+BENCH_FIELDS = (
+    "id",
+    "title",
+    "domain",
+    "kind",
+    "url",
+    "size",
+    "measures",
+    "protocol",
+    "access",
+    "as_of",
+)
+SETUP_FIELDS = ("time_limit", "threads", "hardware", "repeats")
 COMMON = (
     "id",
     "title",
     "domain",
+    "track",
     "status",
     "problem",
     "problem_card",
@@ -62,7 +114,7 @@ COMMON = (
     "authors",
     "ai_assistance",
 )
-RESULT_FIELDS = ("flagship", "claims", "prior_work", "reproduce", "gate", "limits")
+RESULT_FIELDS = ("improves", "flagship", "claims", "prior_work", "gate", "limits")
 
 
 def load_entries() -> list[tuple[Path, Entry]]:
@@ -78,6 +130,40 @@ def load_problems() -> list[tuple[Path, Entry]]:
     ]
 
 
+def load_benchmarks() -> list[tuple[Path, Entry]]:
+    files = sorted(ROOT.glob("benchmarks/*/*.yaml"))
+    return [(f, yaml.safe_load(f.read_text()) or {}) for f in files]
+
+
+def check_benchmark(path: Path, b: Entry) -> list[str]:
+    errs = [f"missing field: {k}" for k in BENCH_FIELDS if not b.get(k)]
+    if errs:
+        return errs
+    if b["id"] != path.stem:
+        errs.append(f"id '{b['id']}' differs from file name '{path.stem}'")
+    if b["domain"] != path.parent.name:
+        errs.append(f"domain '{b['domain']}' differs from folder '{path.parent.name}'")
+    if b["kind"] not in BENCH_KINDS:
+        errs.append(f"kind must be one of {BENCH_KINDS}")
+    if not str(b["url"]).startswith("https://"):
+        errs.append("url must be an https link")
+    if b["kind"] == "own":
+        if not b.get("generator") or not (ROOT / b["generator"]).exists():
+            errs.append("an own benchmark needs a 'generator' path that exists in this repository")
+        if "adopted_by" not in b:
+            errs.append("an own benchmark needs an 'adopted_by' list (may be empty)")
+    return errs
+
+
+def _bench_exists(ref: str) -> bool:
+    return (ROOT / "benchmarks" / f"{ref}.yaml").exists()
+
+
+def criteria(e: Entry) -> tuple[str, ...]:
+    crit: tuple[str, ...] = TRACKS[e["track"]]["criteria"]
+    return crit
+
+
 def check_problem(path: Path, p: Entry) -> list[str]:
     errs = [f"missing field: {k}" for k in PROBLEM_FIELDS if not p.get(k)]
     if errs:
@@ -86,10 +172,9 @@ def check_problem(path: Path, p: Entry) -> list[str]:
         errs.append(f"id '{p['id']}' differs from file name '{path.stem}'")
     if p["domain"] != path.parent.name:
         errs.append(f"domain '{p['domain']}' differs from folder '{path.parent.name}'")
-    for b in p["benchmarks"]:
-        for k in ("name", "kpis", "protocol"):
-            if not b.get(k):
-                errs.append(f"benchmark needs '{k}'")
+    for ref in p["benchmarks"]:
+        if not isinstance(ref, str) or not _bench_exists(ref):
+            errs.append(f"benchmark not found in catalog: benchmarks/{ref}.yaml")
     for s in p["state_of_the_art"]:
         for k in ("method", "result", "source", "as_of"):
             if not s.get(k):
@@ -129,6 +214,50 @@ def _check_links(e: Entry) -> list[str]:
     return errs
 
 
+def _check_gate(folder: Path, e: Entry) -> list[str]:
+    errs = []
+    gate, crit = e["gate"], criteria(e)
+    for c in crit:
+        item = gate.get(c)
+        if not isinstance(item, dict) or "pass" not in item:
+            errs.append(f"gate.{c} needs a 'pass' value")
+        elif item["pass"]:
+            if not _exists(folder, item.get("evidence")):
+                errs.append(f"gate.{c} passes but its evidence path is missing")
+        elif not item.get("note"):
+            errs.append(f"gate.{c} does not pass and needs a 'note' saying why")
+    unknown = sorted(set(gate) - set(crit))
+    if unknown:
+        errs.append(f"gate has criteria that do not belong to track '{e['track']}': {unknown}")
+    authors = [a.get("name") for a in e["authors"]]
+    for c in BY_OTHERS:
+        item = gate.get(c) or {}
+        if c in crit and item.get("pass") and (not item.get("by") or item["by"] in authors):
+            errs.append(f"{c} must name someone who is not an author")
+    posted = [
+        u for u in (e.get("links") or {}).get("upstream") or [] if u.get("state") != "planned"
+    ]
+    if (
+        "upstream_offered" in crit
+        and (gate.get("upstream_offered") or {}).get("pass")
+        and not posted
+    ):
+        errs.append(
+            "upstream_offered passes but links.upstream has no posted issue or pull request"
+        )
+    proofs = (e.get("links") or {}).get("formal_proof") or []
+    if "machine_checked_proof" in crit and (gate.get("machine_checked_proof") or {}).get("pass"):
+        if not proofs:
+            errs.append("machine_checked_proof passes but links.formal_proof is empty")
+    passed = {c for c in crit if isinstance(gate.get(c), dict) and gate[c].get("pass")}
+    minimum = set(crit[: TRACKS[e["track"]]["minimum"]])
+    if e["status"] == "confirmed" and passed != set(crit):
+        errs.append(f"'confirmed' needs every criterion; open: {sorted(set(crit) - passed)}")
+    if e["status"] in ("candidate", "negative") and not minimum <= passed:
+        errs.append(f"'{e['status']}' needs at least {sorted(minimum)}")
+    return errs
+
+
 def check_entry(folder: Path, e: Entry) -> list[str]:
     errs = [f"missing field: {k}" for k in COMMON if not e.get(k)]
     if errs:
@@ -137,6 +266,8 @@ def check_entry(folder: Path, e: Entry) -> list[str]:
         errs.append(f"id '{e['id']}' differs from folder name '{folder.name}'")
     if e["domain"] != folder.parent.name:
         errs.append(f"domain '{e['domain']}' differs from folder '{folder.parent.name}'")
+    if e["track"] not in TRACKS:
+        return errs + [f"track must be one of {tuple(TRACKS)}"]
     if e["status"] not in STATUSES:
         return errs + [f"status must be one of {STATUSES}"]
     if not (folder / "README.md").exists():
@@ -154,18 +285,33 @@ def check_entry(folder: Path, e: Entry) -> list[str]:
             errs.append("a proposal reports no result; remove 'flagship' or change the status")
         return errs
 
-    errs += [f"missing field: {k}" for k in RESULT_FIELDS if not e.get(k)]
-    if errs:
-        return errs
-    bad = [d for d in e.get("improves") or [] if d not in DIMENSIONS]
-    if bad or not e.get("improves"):
+    missing = [f"missing field: {k}" for k in RESULT_FIELDS if not e.get(k)]
+    if e["track"] != "theory" and not e.get("reproduce"):
+        missing.append("missing field: reproduce")
+    if e["track"] == "engineering":
+        setting = e.get("setting") or {}
+        missing += [
+            f"engineering entries need setting.{k}"
+            for k in ("hardware", "software", "data")
+            if not setting.get(k)
+        ]
+    if missing:
+        return errs + missing
+    bad = [d for d in e["improves"] if d not in DIMENSIONS]
+    if bad:
         errs.append(f"'improves' must list one or more of {DIMENSIONS}")
     fl = e["flagship"]
     for k in ("benchmark", "metric", "baseline", "ours", "evidence", "kind"):
         if not fl.get(k):
             errs.append(f"flagship.{k} missing")
-    if fl.get("kind") not in ("measured", "machine-checked"):
-        errs.append("flagship.kind must be 'measured' or 'machine-checked', not an argument")
+    if e["track"] != "theory":
+        if not _bench_exists(str(fl.get("benchmark_id"))):
+            errs.append("flagship.benchmark_id must name a file under benchmarks/ (without .yaml)")
+        setup = fl.get("setup") or {}
+        errs += [f"flagship.setup.{k} missing" for k in SETUP_FIELDS if not setup.get(k)]
+    allowed = TRACKS[e["track"]]["kinds"]
+    if fl.get("kind") not in allowed:
+        errs.append(f"flagship.kind must be one of {allowed} in track '{e['track']}'")
     if fl.get("evidence") and not _exists(folder, fl["evidence"]):
         errs.append(f"flagship.evidence path not found: {fl['evidence']}")
     for i, c in enumerate(e["claims"]):
@@ -175,26 +321,7 @@ def check_entry(folder: Path, e: Entry) -> list[str]:
             errs.append(f"claims[{i}] ({c['kind']}) needs an evidence path or https link")
         elif c["kind"] == "machine-checked" and not c.get("checker"):
             errs.append(f"claims[{i}] is machine-checked and must name its 'checker'")
-    gate = e["gate"]
-    for c in CRITERIA:
-        item = gate.get(c)
-        if not isinstance(item, dict) or "pass" not in item:
-            errs.append(f"gate.{c} needs a 'pass' value")
-        elif item["pass"]:
-            if not _exists(folder, item.get("evidence")):
-                errs.append(f"gate.{c} passes but its evidence path is missing")
-        elif not item.get("note"):
-            errs.append(f"gate.{c} does not pass and needs a 'note' saying why")
-    rep = gate.get("independent_reproduction") or {}
-    if rep.get("pass"):
-        if not rep.get("by") or rep["by"] in [a.get("name") for a in e["authors"]]:
-            errs.append("independent_reproduction must name someone who is not an author")
-    passed = {c for c in CRITERIA if isinstance(gate.get(c), dict) and gate[c].get("pass")}
-    if e["status"] == "confirmed" and passed != set(CRITERIA):
-        errs.append(f"'confirmed' needs every criterion; open: {sorted(set(CRITERIA) - passed)}")
-    if e["status"] in ("candidate", "negative") and not set(CANDIDATE_MIN) <= passed:
-        errs.append(f"'{e['status']}' needs at least {list(CANDIDATE_MIN)}")
-    return errs
+    return errs + _check_gate(folder, e)
 
 
 def _backing(e: Entry) -> str:
@@ -204,39 +331,52 @@ def _backing(e: Entry) -> str:
 
 def table(entries: list[tuple[Path, Entry]]) -> str:
     probs = [
-        "| Problem | Domain | Benchmark and measures | Open dimensions | Entries |",
+        "| Problem | Domain | Benchmarks | Open dimensions | Entries |",
         "|---|---|---|---|---|",
     ]
     for path, p in load_problems():
         key = f"{p['domain']}/{p['id']}"
         n_e = sum(1 for _, e in entries if e.get("problem_card") == key)
-        b = p["benchmarks"][0]
         probs.append(
             f"| [{p['title']}]({path.relative_to(ROOT).as_posix()}) | {p['domain']} | "
-            f"{b['name']}: {'; '.join(b['kpis'])} | {', '.join(p['open_dimensions'])} | {n_e} |"
+            f"{', '.join(r.split('/')[-1] for r in p['benchmarks'])} | "
+            f"{', '.join(p['open_dimensions'])} | {n_e} |"
         )
-    rows = [
-        "| Entry | Status | Improves | Flagship result | Claims | Gate |",
-        "|---|---|---|---|---|---|",
-    ]
-    props = ["| Proposal | Domain | Planned benchmark | Refuted if |", "|---|---|---|---|"]
+    out = "### Problems\n\n" + "\n".join(probs)
+    cat = ["| Benchmark | Domain | Kind | Measures | Protocol |", "|---|---|---|---|---|"]
+    for path, b in load_benchmarks():
+        cat.append(
+            f"| [{b['title']}]({path.relative_to(ROOT).as_posix()}) | {b['domain']} | "
+            f"{b['kind']} | {'; '.join(b['measures'])} | {b['protocol']} |"
+        )
+    out += "\n\n### Benchmarks\n\n" + "\n".join(cat)
+    for track in TRACKS:
+        rows = [
+            "| Entry | Status | Improves | Flagship result | Claims | Gate |",
+            "|---|---|---|---|---|---|",
+        ]
+        for folder, e in entries:
+            if e["track"] != track or e["status"] == "proposed":
+                continue
+            fl, crit = e["flagship"], criteria(e)
+            n = sum(1 for c in crit if e["gate"].get(c, {}).get("pass"))
+            rel = folder.relative_to(ROOT).as_posix()
+            rows.append(
+                f"| [{e['title']}]({rel}/) | {e['status']} | {', '.join(e['improves'])} | "
+                f"{fl['benchmark']}: {fl['ours']} vs {fl['baseline']} | {_backing(e)} | "
+                f"{n}/{len(crit)} |"
+            )
+        body = "\n".join(rows) if len(rows) > 2 else "No entries yet."
+        out += f"\n\n### Results: {track}\n\n{body}"
+    props = ["| Proposal | Track | Planned benchmark | Refuted if |", "|---|---|---|---|"]
     for folder, e in entries:
-        rel = folder.relative_to(ROOT).as_posix()
         if e["status"] == "proposed":
             plan = e["plan"]
+            rel = folder.relative_to(ROOT).as_posix()
             props.append(
-                f"| [{e['title']}]({rel}/) | {e['domain']} | {plan['benchmark']} | "
+                f"| [{e['title']}]({rel}/) | {e['track']} | {plan['benchmark']} | "
                 f"{plan['refuted_if']} |"
             )
-            continue
-        fl = e["flagship"]
-        n = sum(1 for c in CRITERIA if e["gate"].get(c, {}).get("pass"))
-        rows.append(
-            f"| [{e['title']}]({rel}/) | {e['status']} | {', '.join(e['improves'])} | "
-            f"{fl['benchmark']}: {fl['ours']} vs {fl['baseline']} | {_backing(e)} | "
-            f"{n}/{len(CRITERIA)} |"
-        )
-    out = "### Problems\n\n" + "\n".join(probs) + "\n\n### Results\n\n" + "\n".join(rows)
     if len(props) > 2:
         out += "\n\n### Open proposals (no result yet)\n\n" + "\n".join(props)
     return out
@@ -248,6 +388,12 @@ if __name__ == "__main__":
         print(table(entries))
         sys.exit(0)
     bad = 0
+    for path, b in load_benchmarks():
+        errs = check_benchmark(path, b)
+        print(("FAIL " if errs else "ok   ") + path.relative_to(ROOT).as_posix())
+        for msg in errs:
+            print("     - " + msg)
+        bad += bool(errs)
     for path, p in load_problems():
         errs = check_problem(path, p)
         print(("FAIL " if errs else "ok   ") + path.relative_to(ROOT).as_posix())

@@ -1,0 +1,10 @@
+id: miplib-2017
+title: "MIPLIB 2017"
+domain: combinatorial-optimization
+kind: public-suite
+url: "https://miplib.zib.de/"
+size: "Benchmark set of 240 instances, plus a larger collection set"
+measures: ["instances solved within the time limit", "time to optimality", "gap to best known"]
+protocol: "Instances are tagged easy (solved within one hour by an out-of-the-box solver), hard or open."
+access: "Free download from the site."
+as_of: "2026-11-22"
