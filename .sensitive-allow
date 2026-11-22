@@ -1,0 +1,3 @@
+# path-glob :: rule     (rule "*" allows every rule for that path; give the reason in a comment)
+tools/test_scan_sensitive.py :: *      # test fixtures: made-up values that the scanner must catch
+tools/scan_sensitive.py :: *           # the patterns themselves

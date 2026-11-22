@@ -114,8 +114,8 @@ entries/<domain>/<entry>/          one self-contained folder per attempt
   README.md                        problem, result, method, reproduction, limits
   src/ tests/ bench/               method, tests, benchmark drivers
   evidence/                        raw run files and machine stamps
-agents/  skills/                   role definitions and procedures for AI agents
-tools/                             gate checker and registry generator
+AGENTS.md  agents/  skills/        instructions, role definitions and procedures for AI agents
+tools/                             gate checker, registry generator, privacy scanner, machine stamp
 templates/                         starting points for benchmark cards, problem cards and entries
 ```
 

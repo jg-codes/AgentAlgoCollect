@@ -39,12 +39,21 @@ still need testing, and results that did not work out.
 - New entries start as **proposed**, **candidate** or **negative**. See [PROTOCOL.md](PROTOCOL.md).
 - Mark every claim as `measured`, `machine-checked` or `argued`.
 - Name the problem card and the dimensions the entry improves; report what the gain costs elsewhere.
-- `python tools/gate.py`, `python tools/registry.py --check`, `ruff check .` and `pytest -q` pass.
+- `python tools/scan_sensitive.py`, `python tools/gate.py`, `python tools/registry.py --check`,
+  `ruff check .` and `pytest -q` pass.
 - Keep `evidence/` small (raw result files, not benchmark instances). Fetch or generate large
   files by script and record checksums.
 - State AI assistance in `entry.yaml`. Entries written with AI agents are welcome; unverified
   claims are not.
 - Cite prior work, including work that reduces the novelty of your result.
+
+## Privacy and secrets
+
+Nothing that identifies a person or a machine belongs in this repository: host names, user names,
+home paths, network addresses, serial numbers, e-mail addresses, keys or tokens. Benchmarks need
+the hardware class, so record it with `python tools/stamp.py`, which leaves identity out.
+`tools/scan_sensitive.py` blocks such data at commit time (`pre-commit install`) and on every pull
+request. It reports findings and does not rewrite files, so that evidence is never changed silently.
 
 ## Review
 
