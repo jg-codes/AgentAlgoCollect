@@ -36,7 +36,7 @@ FORBIDDEN = 0.15
 
 
 def rphp(p: int, r: int, h: int, forbid: float, seed: int) -> tuple[int, list[list[int]]]:
-    """Relativized pigeonhole in clauses; `forbid` is the share of options removed by unit clauses."""
+    """Relativized pigeonhole in clauses; `forbid` is the share of options removed."""
     rng = random.Random(seed)
 
     def pv(i: int, j: int) -> int:
