@@ -13,10 +13,9 @@ used_in:
   - "Pseudo-Boolean and integer-programming solvers that receive clausal input"
 
 benchmarks:
-  - name: "GBD family relativized-pigeon-hole (55 instances)"
-    url: "https://benchmark-database.de"
-    kpis: ["instances solved within the time limit", "PAR-2 score", "proof or certificate produced"]
-    protocol: "SAT Competition: 5000 s per instance, single thread"
+  - sat-pb/gbd-relativized-pigeon-hole
+  - sat-pb/perturbed-relativized-pigeonhole
+  - sat-pb/pb-competition-2025
 
 state_of_the_art:
   - method: "Solver synthesized for this family (Green, Le Goues, Brown)"

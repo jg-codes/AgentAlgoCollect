@@ -1,6 +1,6 @@
 # Does the hidden conditional-counting pattern occur in real-world instances?
 
-**Status: proposed** (no result yet)
+**Status: proposed** (track: applied; no result yet)
 
 The [cardinality-lifting](../cardinality-lifting/) entry shows a rewrite that helps on crafted
 formulas. This proposal asks whether its key rule ever applies outside them.

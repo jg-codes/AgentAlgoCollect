@@ -1,6 +1,7 @@
 id: product-extension-in-practice
 title: "Does the hidden conditional-counting pattern occur in real-world instances?"
 domain: sat-pb
+track: applied
 problem_card: sat-pb/hidden-counting-in-clauses
 status: proposed
 date: "2026-11-22"

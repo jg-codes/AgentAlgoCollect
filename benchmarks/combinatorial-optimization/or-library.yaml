@@ -1,0 +1,10 @@
+id: or-library
+title: "OR-Library"
+domain: combinatorial-optimization
+kind: public-suite
+url: "https://people.brunel.ac.uk/~mastjjb/jeb/info.html"
+size: "Test data for many problem families, including set covering, assignment, bin packing, location, routing and scheduling"
+measures: ["objective value", "gap to best known", "time to best solution"]
+protocol: "None fixed by the library; state limits, hardware and the best-known values used."
+access: "Free download; maintained by J. E. Beasley (page last updated February 2018)."
+as_of: "2026-11-22"

@@ -1,6 +1,7 @@
 id: my-entry                # must equal the folder name
 title: ""
 domain: sat-pb              # must equal the parent folder name
+track: applied              # theory | applied | engineering
 problem_card: sat-pb/hidden-counting-in-clauses   # a file under problems/, without .yaml
 improves: []                # from: speed, quality, robustness, generality, simplicity, efficiency, verifiability
 status: candidate           # proposed | candidate | confirmed | negative
@@ -17,6 +18,13 @@ flagship:
   ours: ""
   evidence: ""              # path inside this folder
   kind: measured            # measured | machine-checked
+  benchmark_id: ""          # a file under benchmarks/, without .yaml (not needed in track theory)
+  setup:
+    time_limit: ""
+    threads: 1
+    hardware: ""
+    repeats: 1
+    baseline_settings: ""   # version and options of the baseline
 
 claims:
   - text: ""
@@ -39,6 +47,11 @@ novelty: ""
 
 reproduce: "bash bench/reproduce.sh"
 
+# The criteria below are those of track "applied". For the other tracks see PROTOCOL.md:
+#   engineering: behaviour_preserved, public_baseline, one_command_reproduction, second_machine,
+#                upstream_offered, independent_reproduction; plus
+#                setting: {hardware: "", software: "", data: ""}
+#   theory:      written_argument, prior_work_check, machine_checked_proof, independent_review
 gate:
   soundness_tests: {pass: false, note: ""}
   public_baseline: {pass: false, note: ""}

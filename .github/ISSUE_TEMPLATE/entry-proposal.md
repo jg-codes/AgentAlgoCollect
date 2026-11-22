@@ -3,6 +3,8 @@ name: Entry proposal
 about: Propose a new entry before opening a pull request
 ---
 
+**Track** (theory / applied / engineering):
+
 **Problem** (two sentences):
 
 **Baseline** (strongest public method, version):

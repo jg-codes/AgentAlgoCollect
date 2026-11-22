@@ -1,0 +1,15 @@
+id: my-benchmark            # must equal the file name
+title: ""
+domain: sat-pb              # must equal the parent folder name
+kind: public-suite          # public-suite | paper | generator | own
+url: ""                     # where to get it (https)
+source: ""                  # optional: paper or DOI link that defines it
+size: ""                    # number and type of instances
+measures: []                # what is measured on it
+protocol: ""                # limits, threads, hardware class, scoring
+access: ""                  # how to obtain the files; license if known
+as_of: ""                   # date this card was checked
+
+# For kind "own" (no public benchmark exists) also give:
+# generator: path/in/this/repository.py     # or instance files with checksums
+# adopted_by: []                            # people other than the authors who have used it

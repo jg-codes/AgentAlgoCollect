@@ -26,7 +26,13 @@ An entry lists what it improves, from a fixed list:
 
 A gain in one dimension is reported together with what it costs in the others.
 
-## Criteria
+## Tracks and criteria
+
+Every entry belongs to one track. The first criteria listed are the minimum for **candidate** and
+**negative**; all are needed for **confirmed**.
+
+### applied (minimum: first three)
+
 
 | Criterion | Passes when |
 |---|---|
@@ -41,6 +47,54 @@ A gain in one dimension is reported together with what it costs in the others.
 A criterion that passes must point to evidence: one or more files inside the entry, or an https link. A criterion that does not pass must
 carry a note saying why.
 
+### engineering (minimum: first three)
+
+For the same algorithm and results with a better implementation or a better fit to data and hardware.
+
+| Criterion | Passes when |
+|---|---|
+| `behaviour_preserved` | Tests show outputs or solution quality are unchanged against the reference implementation. |
+| `public_baseline` | The existing implementation at a named version was run under the same setup. |
+| `one_command_reproduction` | One command reproduces the flagship measurement. |
+| `second_machine` | The gain was measured on different hardware. |
+| `upstream_offered` | An issue or pull request in the original project is linked under `links.upstream`. |
+| `independent_reproduction` | Someone who is not an author reran it. |
+
+Engineering entries state their `setting`: hardware, software versions and data.
+
+### theory (minimum: first two)
+
+For results that cannot be run or benchmarked today.
+
+| Criterion | Passes when |
+|---|---|
+| `written_argument` | A complete written argument is in the entry. |
+| `prior_work_check` | The entry lists the best previously known result and the search made for prior work. |
+| `machine_checked_proof` | A proof in Lean or a similar system is linked under `links.formal_proof`. |
+| `independent_review` | Someone who is not an author has checked the argument and is named. |
+
+## Benchmark report
+
+Every measured flagship result states, in `entry.yaml` under `flagship`:
+
+- `benchmark_id`: a card from `benchmarks/`;
+- `setup`: time limit, threads, hardware, number of repeats, and the baseline's version and options;
+- the instance set and how it was chosen, in the entry README;
+- the raw output of both methods, in `evidence/`.
+
+### When no public benchmark exists
+
+An entry may bring its own benchmark. It then adds a benchmark card with `kind: own` and:
+
+1. a generator script, or the instance files with checksums, inside the repository;
+2. the rule by which instances were chosen, fixed before the results were looked at;
+3. the baseline run on exactly the same instances;
+4. control instances on which the method should make no difference.
+
+Such an entry can be a **candidate**. Its `real_benchmark_files` criterion passes only once someone
+other than the authors has used the benchmark and is listed under `adopted_by`, or the result is
+repeated on a public suite.
+
 ## Kinds of claim
 
 Each claim in `entry.yaml` has a `kind`:
@@ -50,7 +104,8 @@ Each claim in `entry.yaml` has a `kind`:
   similar system, link the repository, commit and statement under `links.formal_proof`.
 - `argued`: a written argument only.
 
-The flagship result must be `measured` or `machine-checked`. An `argued` claim is welcome, is shown
+In the applied track the flagship result must be `measured` or `machine-checked`; in engineering
+`measured`; in theory it may be `argued` or `machine-checked`. An `argued` claim is welcome, is shown
 as such in the registry, and is an open invitation to formalize or test it.
 
 ## Links
@@ -62,9 +117,9 @@ as such in the registry, and is an open invitation to formalize or test it.
 ## Labels
 
 - **proposed**: no result; a planned benchmark, a baseline and a `refuted_if` condition.
-- **candidate**: the first three criteria pass.
-- **confirmed**: all seven pass.
-- **negative**: the first three pass and the result is that the idea does not improve on the baseline.
+- **candidate**: the minimum criteria of the entry's track pass.
+- **confirmed**: every criterion of the track passes.
+- **negative**: the minimum criteria pass and the result is that the idea does not improve on the baseline.
 
 ## Reporting rules
 

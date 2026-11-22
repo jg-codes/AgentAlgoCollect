@@ -1,6 +1,6 @@
 # Counting where symmetry breaking fails
 
-**Status: candidate** (3 of 7 gate criteria; see `entry.yaml`)
+**Status: candidate** (track: applied; 3 of 7 gate criteria; see `entry.yaml`)
 **Problem card:** [hidden counting in clauses](../../../problems/sat-pb/hidden-counting-in-clauses.yaml)
 **Improves:** robustness, verifiability. **Costs:** added time on formulas without the structure (see Limits).
 
@@ -66,7 +66,7 @@ KISSAT=/path/to/kissat BREAKID=/path/to/breakid bash bench/reproduce.sh   # adds
 
 ## Limits
 
-- 60 s limits, not the 5000 s competition protocol; no long baseline run on the 22 flagship instances.
+- 60 s limits, not a competition-length protocol; no long baseline run on the 22 flagship instances.
   On one of the 55 (p90_r90), BreakID + Kissat succeeds when given 238 s.
 - Baselines not run: SBVA, SATSUMA, RoundingSat with cardinality detection, Exact built with its
   LP solver, and the family-specific solver of Green et al.

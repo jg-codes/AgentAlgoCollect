@@ -1,0 +1,10 @@
+id: kvpress-evaluation
+title: "kvpress evaluation suite and leaderboard"
+domain: machine-learning
+kind: public-suite
+url: "https://github.com/NVIDIA/kvpress"
+size: "Several long-context datasets (RULER among them), run through an evaluation command-line tool"
+measures: ["task accuracy at a given compression ratio", "peak memory", "total time"]
+protocol: "See evaluation/README.md in the repository; state model, dataset, context length and compression ratio."
+access: "Open repository; leaderboard at https://huggingface.co/spaces/nvidia/kvpress-leaderboard"
+as_of: "2026-11-22"

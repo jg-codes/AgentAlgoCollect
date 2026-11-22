@@ -1,0 +1,10 @@
+id: sat-competition-2025
+title: "SAT Competition 2025"
+domain: sat-pb
+kind: public-suite
+url: "https://satcompetition.github.io/2025/"
+size: "Main Track and Parallel Track"
+measures: ["instances solved within the time limit", "PAR-2 score"]
+protocol: "Limits and scoring are set in the competition rules; state the ones used."
+access: "Instances are distributed through the competition site and the Global Benchmark Database."
+as_of: "2026-11-22"
