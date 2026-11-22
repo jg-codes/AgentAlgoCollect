@@ -1,0 +1,16 @@
+{"status": "infeasible", "lift_s": 0.0, "total_s": 0.059, "nodes": 1, "model_ok": null, "file": "gen/php9.cnf", "mode": "raw"}
+{"status": "infeasible", "lift_s": 0.0, "total_s": 0.009, "nodes": 1, "model_ok": null, "file": "gen/php9.cnf", "mode": "lifted"}
+{"status": "infeasible", "lift_s": 0.0, "total_s": 0.03, "nodes": 1, "model_ok": null, "file": "gen/mchess14.cnf", "mode": "raw"}
+{"status": "infeasible", "lift_s": 0.002, "total_s": 0.019, "nodes": 1, "model_ok": null, "file": "gen/mchess14.cnf", "mode": "lifted"}
+{"status": "timelimit", "lift_s": 0.0, "total_s": 60.066, "nodes": 6182, "model_ok": null, "file": "gbd_inst/rphp_p20_r20.cnf", "mode": "raw"}
+{"status": "infeasible", "lift_s": 0.032, "total_s": 0.076, "nodes": 1, "model_ok": null, "file": "gbd_inst/rphp_p20_r20.cnf", "mode": "lifted"}
+{"status": "timelimit", "lift_s": 0.0, "total_s": 60.074, "nodes": 37825, "model_ok": null, "file": "gbd_inst/rphp4_065_shuffled.cnf", "mode": "raw"}
+{"status": "infeasible", "lift_s": 0.043, "total_s": 0.069, "nodes": 1, "model_ok": null, "file": "gbd_inst/rphp4_065_shuffled.cnf", "mode": "lifted"}
+{"status": "timelimit", "lift_s": 0.0, "total_s": 60.321, "nodes": 1574, "model_ok": null, "file": "gbd_inst/rphp_p35_r35.cnf", "mode": "raw"}
+{"status": "infeasible", "lift_s": 0.151, "total_s": 0.276, "nodes": 1, "model_ok": null, "file": "gbd_inst/rphp_p35_r35.cnf", "mode": "lifted"}
+{"status": "infeasible", "lift_s": 0.0, "total_s": 11.41, "nodes": 1, "model_ok": null, "file": "pert/rphp_pert_p20_r20_f15_s1.cnf", "mode": "raw"}
+{"status": "infeasible", "lift_s": 0.036, "total_s": 0.074, "nodes": 1, "model_ok": null, "file": "pert/rphp_pert_p20_r20_f15_s1.cnf", "mode": "lifted"}
+{"status": "optimal", "lift_s": 0.0, "total_s": 0.381, "nodes": 1, "model_ok": true, "file": "gen/kclique.cnf", "mode": "raw"}
+{"status": "optimal", "lift_s": 0.323, "total_s": 0.566, "nodes": 1, "model_ok": true, "file": "gen/kclique.cnf", "mode": "lifted"}
+{"status": "infeasible", "lift_s": 0.0, "total_s": 0.176, "nodes": 13, "model_ok": null, "file": "gen/cc.cnf", "mode": "raw"}
+{"status": "infeasible", "lift_s": 0.001, "total_s": 0.156, "nodes": 11, "model_ok": null, "file": "gen/cc.cnf", "mode": "lifted"}

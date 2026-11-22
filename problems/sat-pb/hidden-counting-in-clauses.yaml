@@ -1,0 +1,42 @@
+id: hidden-counting-in-clauses
+title: "Refuting counting arguments hidden in clausal form"
+domain: sat-pb
+as_of: "2026-11-22"
+
+statement: >
+  Decide unsatisfiability of formulas whose contradiction is a counting argument (more items than
+  slots), when the formula is given as clauses, so the counting constraints are not explicit.
+
+used_in:
+  - "Infeasibility of assignment-type constraints (items to slots, tasks to machines) after encoding to clauses"
+  - "Standard stress families in SAT competitions: pigeonhole, relativized pigeonhole, mutilated chessboard"
+  - "Pseudo-Boolean and integer-programming solvers that receive clausal input"
+
+benchmarks:
+  - name: "GBD family relativized-pigeon-hole (55 instances)"
+    url: "https://benchmark-database.de"
+    kpis: ["instances solved within the time limit", "PAR-2 score", "proof or certificate produced"]
+    protocol: "SAT Competition: 5000 s per instance, single thread"
+
+state_of_the_art:
+  - method: "Solver synthesized for this family (Green, Le Goues, Brown)"
+    result: "9 of 11 validation instances; their baseline solves 8 of 11"
+    source: "https://arxiv.org/abs/2609.14836"
+    as_of: "2026-11-20"
+  - method: "Cardinality detection in a pseudo-Boolean solver (Elffers, Nordstrom)"
+    result: "Solves pairwise pigeonhole; relativized pigeonhole reported as a failure case"
+    source: "https://doi.org/10.1609/aaai.v34i02.5508"
+    as_of: "2026-11-20"
+  - method: "Symmetry breaking before a clause-learning solver (BreakID + Kissat 4.0.4)"
+    result: "46 of 55 regenerated instances at 60 s; 0 of 22 once 15% of options are forbidden"
+    source: "entries/sat-pb/cardinality-lifting/TABLES.md"
+    as_of: "2026-11-21"
+    measured_here: true
+
+pain_points:
+  - "Clause-learning solvers need exponential time on these formulas (Haken 1985)."
+  - "Symmetry breaking can stop working when the instance is not regular (0 of 22 in the one test recorded here)."
+  - "Solvers with native counting reasoning do not always recover the constraints from clausal input (Elffers and Nordstrom report relativized pigeonhole as a failure case)."
+  - "Solvers built for one family are not designed to transfer to other formulas."
+
+open_dimensions: [robustness, generality, verifiability, speed]

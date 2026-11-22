@@ -1,0 +1,19 @@
+[project]
+name = "agentalgocollect"
+version = "0.1.0"
+description = "A gated public registry of agent-assisted algorithm improvements"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0 (code), CC-BY-4.0 (text and data)" }
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"entries/*/*/bench/*" = ["E501", "E701", "E702", "E731", "E741"]
+
+[tool.pytest.ini_options]
+testpaths = ["entries", "tools"]

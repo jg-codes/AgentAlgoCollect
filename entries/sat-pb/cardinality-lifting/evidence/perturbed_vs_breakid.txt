@@ -1,0 +1,12 @@
+rphp_pert_p12_r36_f15_s1 | BreakID+Kissat: TIMEOUT 60.93s | ours: UNSAT 0.08 | "verified": true
+rphp_pert_p12_r36_f15_s2 | BreakID+Kissat: TIMEOUT 60.72s | ours: UNSAT 0.07 | "verified": true
+rphp_pert_p20_r20_f15_s1 | BreakID+Kissat: TIMEOUT 60.71s | ours: UNSAT 0.05 | "verified": true
+rphp_pert_p20_r20_f15_s2 | BreakID+Kissat: TIMEOUT 60.65s | ours: UNSAT 0.05 | "verified": true
+rphp_pert_p20_r60_f15_s1 | BreakID+Kissat: TIMEOUT 61.64s | ours: UNSAT 0.38 | "verified": true
+rphp_pert_p20_r60_f15_s2 | BreakID+Kissat: TIMEOUT 61.58s | ours: UNSAT 0.37 | "verified": true
+rphp_pert_p35_r35_f15_s1 | BreakID+Kissat: TIMEOUT 61.34s | ours: UNSAT 0.27 | "verified": true
+rphp_pert_p35_r35_f15_s2 | BreakID+Kissat: TIMEOUT 61.49s | ours: UNSAT 0.25 | "verified": true
+rphp_pert_p60_r60_f15_s1 | BreakID+Kissat: TIMEOUT 66.69s | ours: UNSAT 2.01 | "verified": true
+rphp_pert_p60_r60_f15_s2 | BreakID+Kissat: TIMEOUT 66.19s | ours: UNSAT 1.59 | "verified": true
+rphp_pert_p8_r25_f15_s1 | BreakID+Kissat: TIMEOUT 60.59s | ours: UNSAT 0.04 | "verified": true
+rphp_pert_p8_r25_f15_s2 | BreakID+Kissat: TIMEOUT 60.54s | ours: UNSAT 0.03 | "verified": true

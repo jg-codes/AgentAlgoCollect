@@ -1,0 +1,24 @@
+id: my-problem              # must equal the file name
+title: ""
+domain: sat-pb              # must equal the parent folder name
+as_of: ""                   # date the state of the art below was checked
+
+statement: ""               # the problem in one paragraph
+
+used_in: []                 # where the algorithm is used and why an improvement matters
+
+benchmarks:
+  - name: ""
+    url: ""
+    kpis: []                # what is measured, e.g. solved within limit, PAR-2, gap to best known
+    protocol: ""            # time limit, threads, hardware class
+
+state_of_the_art:
+  - method: ""
+    result: ""
+    source: ""              # https link or DOI link; or a path in this repository with measured_here: true
+    as_of: ""
+
+pain_points: []             # what remains hard
+
+open_dimensions: []         # from: speed, quality, robustness, generality, simplicity, efficiency, verifiability

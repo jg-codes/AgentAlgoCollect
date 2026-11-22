@@ -1,0 +1,22 @@
+id: product-extension-in-practice
+title: "Does the hidden conditional-counting pattern occur in real-world instances?"
+domain: sat-pb
+problem_card: sat-pb/hidden-counting-in-clauses
+status: proposed
+date: "2026-11-22"
+
+problem: >
+  The cardinality-lifting entry is tested on crafted formulas only. Whether its product-extension
+  rule ever applies to industrial or application instances is unknown.
+claim: >
+  The product-extension rule applies to a measurable share of non-crafted benchmark instances and
+  changes solver outcomes on some of them.
+
+plan:
+  benchmark: "Application tracks of recent SAT and pseudo-Boolean competitions; MIPLIB 0-1 models"
+  baseline: "Each solver (Kissat, Exact, SCIP, CP-SAT) on the unmodified instance, same budget"
+  refuted_if: "The rule applies to under 1% of instances, or no instance changes outcome"
+
+authors:
+  - name: "Johannes Gast"
+ai_assistance: "Proposal drafted by an AI agent (Claude, via Claude Code) under the author's direction."

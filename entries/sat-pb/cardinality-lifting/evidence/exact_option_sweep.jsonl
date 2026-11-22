@@ -1,0 +1,39 @@
+{"status": "TIMEOUT", "conflicts": 605002.0, "amo": 90.0, "time": 30.06114277, "file": "gen/php9.cnf", "config": "default"}
+{"status": "TIMEOUT", "conflicts": 605002.0, "amo": 90.0, "time": 30.264255534, "file": "gen/php9.cnf", "config": "amo_unlimited"}
+{"status": "TIMEOUT", "conflicts": 622259.0, "amo": 90.0, "time": 30.468931065, "file": "gen/php9.cnf", "config": "amo_unlimited_basetime10"}
+{"status": "TIMEOUT", "conflicts": 596391.0, "amo": 90.0, "time": 30.22686948, "file": "gen/php9.cnf", "config": "probing_unlimited"}
+{"status": "TIMEOUT", "conflicts": 639557.0, "amo": 180.0, "time": 30.234743024, "file": "gen/php9.cnf", "config": "dominance_unlimited"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gen/php9.cnf", "config": "lp_full"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gen/php9.cnf", "config": "lp_full_amo"}
+{"status": "TIMEOUT", "conflicts": 622259.0, "amo": 90.0, "time": 30.331726512, "file": "gen/php9.cnf", "config": "ca_liftdegree"}
+{"status": "TIMEOUT", "conflicts": 596391.0, "amo": 90.0, "time": 30.216091474, "file": "gen/php9.cnf", "config": "ca_multiply"}
+{"status": "TIMEOUT", "conflicts": 596391.0, "amo": 90.0, "time": 30.287050371, "file": "gen/php9.cnf", "config": "ca_weaken_nonimplying"}
+{"status": "TIMEOUT", "conflicts": 605002.0, "amo": 90.0, "time": 30.011215904, "file": "gen/php9.cnf", "config": "bits_cardinality"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gen/php9.cnf", "config": "all"}
+{"status": "TIMEOUT", "conflicts": 527864.0, "amo": 420.0, "time": 30.361725564, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "default"}
+{"status": "TIMEOUT", "conflicts": 519349.0, "amo": 420.0, "time": 30.209587554, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "amo_unlimited"}
+{"status": "TIMEOUT", "conflicts": 519349.0, "amo": 420.0, "time": 30.160860401, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "amo_unlimited_basetime10"}
+{"status": "TIMEOUT", "conflicts": 510847.0, "amo": 420.0, "time": 30.35454002, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "probing_unlimited"}
+{"status": "TIMEOUT", "conflicts": 393145.0, "amo": 1694.0, "time": 30.686370794, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "dominance_unlimited"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gbd_inst/rphp_p20_r20.cnf", "config": "lp_full"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gbd_inst/rphp_p20_r20.cnf", "config": "lp_full_amo"}
+{"status": "TIMEOUT", "conflicts": 519349.0, "amo": 420.0, "time": 30.426489885, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "ca_liftdegree"}
+{"status": "TIMEOUT", "conflicts": 527864.0, "amo": 420.0, "time": 30.193641064, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "ca_multiply"}
+{"status": "TIMEOUT", "conflicts": 536391.0, "amo": 420.0, "time": 30.060883722, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "ca_weaken_nonimplying"}
+{"status": "TIMEOUT", "conflicts": 536391.0, "amo": 420.0, "time": 30.399801106, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "bits_cardinality"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gbd_inst/rphp_p20_r20.cnf", "config": "all"}
+{"status": "TIMEOUT", "conflicts": 726608.0, "amo": 616.0, "time": 30.031509054, "file": "gen/mchess14.cnf", "config": "default"}
+{"status": "TIMEOUT", "conflicts": 726608.0, "amo": 616.0, "time": 30.238407041, "file": "gen/mchess14.cnf", "config": "amo_unlimited"}
+{"status": "TIMEOUT", "conflicts": 709125.0, "amo": 616.0, "time": 30.027426173, "file": "gen/mchess14.cnf", "config": "amo_unlimited_basetime10"}
+{"status": "TIMEOUT", "conflicts": 700398.0, "amo": 616.0, "time": 30.204151566, "file": "gen/mchess14.cnf", "config": "probing_unlimited"}
+{"status": "TIMEOUT", "conflicts": 726608.0, "amo": 616.0, "time": 30.06417091, "file": "gen/mchess14.cnf", "config": "dominance_unlimited"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gen/mchess14.cnf", "config": "lp_full"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gen/mchess14.cnf", "config": "lp_full_amo"}
+{"status": "TIMEOUT", "conflicts": 726608.0, "amo": 616.0, "time": 30.265123183, "file": "gen/mchess14.cnf", "config": "ca_liftdegree"}
+{"status": "TIMEOUT", "conflicts": 709125.0, "amo": 616.0, "time": 30.233633692, "file": "gen/mchess14.cnf", "config": "ca_multiply"}
+{"status": "TIMEOUT", "conflicts": 717864.0, "amo": 622.0, "time": 30.329401555, "file": "gen/mchess14.cnf", "config": "ca_weaken_nonimplying"}
+{"status": "TIMEOUT", "conflicts": 717863.0, "amo": 624.0, "time": 30.109459436, "file": "gen/mchess14.cnf", "config": "bits_cardinality"}
+{"status": "OPTION_ERROR", "err": "Unknown option: lp-budget.\nCheck usage with --help", "file": "gen/mchess14.cnf", "config": "all"}
+{"status": "TIMEOUT", "conflicts": 639557.0, "amo": 180.0, "time": 30.333543743, "file": "gen/php9.cnf", "config": "all_without_lp"}
+{"status": "TIMEOUT", "conflicts": 310859.0, "amo": 1694.0, "time": 30.062293939, "file": "gbd_inst/rphp_p20_r20.cnf", "config": "all_without_lp"}
+{"status": "TIMEOUT", "conflicts": 709125.0, "amo": 616.0, "time": 30.289526215, "file": "gen/mchess14.cnf", "config": "all_without_lp"}

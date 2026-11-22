@@ -1,0 +1,6 @@
+exact_raw UNSAT 25.146 876780.0
+lift_exact UNSAT 27.589 860689.0
+exact_raw UNSAT 24.121 876780.0
+lift_exact UNSAT 26.656 860689.0
+exact_raw UNSAT 24.321 876780.0
+lift_exact UNSAT 26.857 860689.0

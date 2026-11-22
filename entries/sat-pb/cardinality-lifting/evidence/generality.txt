@@ -1,0 +1,16 @@
+gen/cc.cnf exact_raw UNSAT 24.858 model_ok= None amo= None ext= None
+gen/cc.cnf lift_exact UNSAT 27.154 model_ok= None amo= 24 ext= 0
+gen/kclique.cnf exact_raw SAT 0.039 model_ok= None amo= None ext= None
+gen/kclique.cnf lift_exact SAT 0.541 model_ok= True amo= 1225 ext= 0
+gen/op40.cnf exact_raw UNSAT 0.656 model_ok= None amo= None ext= None
+gen/op40.cnf lift_exact UNSAT 0.691 model_ok= None amo= 0 ext= 0
+gen/php13.cnf exact_raw TIMEOUT 30.459 model_ok= None amo= None ext= None
+gen/php13.cnf lift_exact UNSAT 0.004 model_ok= None amo= 12 ext= 0
+gen/rand3_sat.cnf exact_raw SAT 0.017 model_ok= None amo= None ext= None
+gen/rand3_sat.cnf lift_exact SAT 0.017 model_ok= True amo= 0 ext= 0
+gen/rand3_unsat.cnf exact_raw UNSAT 0.557 model_ok= None amo= None ext= None
+gen/rand3_unsat.cnf lift_exact UNSAT 0.557 model_ok= None amo= 0 ext= 0
+gen/rphp_sat.cnf exact_raw SAT 0.046 model_ok= None amo= None ext= None
+gen/rphp_sat.cnf lift_exact SAT 0.058 model_ok= True amo= 44 ext= 420
+gen/tseitin50.cnf exact_raw TIMEOUT 30.104 model_ok= None amo= None ext= None
+gen/tseitin50.cnf lift_exact TIMEOUT 30.156 model_ok= None amo= 0 ext= 600

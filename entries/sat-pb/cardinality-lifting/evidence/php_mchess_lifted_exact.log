@@ -1,0 +1,11 @@
+php 8 exact+lift ('UNSAT', 0.0, 5.0, 8) lift_s 0.0
+php 9 exact+lift ('UNSAT', 0.0, 5.0, 9) lift_s 0.0
+php 12 exact+lift ('UNSAT', 0.0, 8.0, 12) lift_s 0.001
+php 20 exact+lift ('UNSAT', 0.001, 3.0, 20) lift_s 0.004
+php 40 exact+lift ('UNSAT', 0.007, 23.0, 40) lift_s 0.044
+php 100 exact+lift ('UNSAT', 0.029, 40.0, 100) lift_s 1.071
+mchess 12 exact+lift ('UNSAT', 0.001, 33.0, 142) lift_s 0.001
+mchess 14 exact+lift ('UNSAT', 0.001, 45.0, 194) lift_s 0.001
+mchess 20 exact+lift ('UNSAT', 0.003, 116.0, 398) lift_s 0.002
+mchess 40 exact+lift ('UNSAT', 0.053, 986.0, 1598) lift_s 0.01
+control php12 minus one pigeon: SAT

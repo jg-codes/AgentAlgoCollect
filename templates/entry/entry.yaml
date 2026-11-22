@@ -1,0 +1,51 @@
+id: my-entry                # must equal the folder name
+title: ""
+domain: sat-pb              # must equal the parent folder name
+problem_card: sat-pb/hidden-counting-in-clauses   # a file under problems/, without .yaml
+improves: []                # from: speed, quality, robustness, generality, simplicity, efficiency, verifiability
+status: candidate           # proposed | candidate | confirmed | negative
+version: "0.1.0"
+date: ""
+
+problem: ""                 # two sentences
+claim: ""                   # one sentence, falsifiable
+
+flagship:
+  benchmark: ""
+  metric: ""
+  baseline: ""              # name, version, score
+  ours: ""
+  evidence: ""              # path inside this folder
+  kind: measured            # measured | machine-checked
+
+claims:
+  - text: ""
+    kind: measured          # measured | machine-checked (name the checker) | argued
+    evidence: ""            # a path, a list of paths, or an https link
+
+links:
+  upstream: []              # {target, url, state: planned|open|merged|declined}
+  formal_proof: []          # {system, url, commit, statement}
+
+# For status "proposed" replace flagship, claims, gate and limits with:
+# plan: {benchmark: "", baseline: "", refuted_if: ""}
+
+authors:
+  - name: ""
+ai_assistance: ""           # what the AI did, what was human-checked
+
+prior_work: []
+novelty: ""
+
+reproduce: "bash bench/reproduce.sh"
+
+gate:
+  soundness_tests: {pass: false, note: ""}
+  public_baseline: {pass: false, note: ""}
+  one_command_reproduction: {pass: false, note: ""}
+  baseline_coverage: {pass: false, note: ""}
+  real_benchmark_files: {pass: false, note: ""}
+  second_machine: {pass: false, note: ""}
+  independent_reproduction: {pass: false, note: ""}
+
+limits: []

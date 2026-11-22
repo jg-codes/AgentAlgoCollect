@@ -1,0 +1,103 @@
+id: cardinality-lifting
+title: "Counting where symmetry breaking fails: certified refutation of pigeonhole-type formulas"
+domain: sat-pb
+problem_card: sat-pb/hidden-counting-in-clauses
+status: candidate
+version: "0.1.0"
+date: "2026-11-22"
+
+problem: >
+  Clause-learning SAT solvers need exponential time on counting arguments such as "more pigeons than
+  holes". Symmetry breaking, a common remedy, depends on the instance being regular.
+claim: >
+  An equivalence-preserving rewrite without family-specific code (product extension, substitution,
+  literal-clique cover) makes the counting explicit, so a cutting-planes solver or plain linear
+  programming refutes relativized pigeonhole formulas without relying on symmetry, with a certificate
+  checked by independent code.
+
+improves: [robustness, verifiability]
+
+flagship:
+  benchmark: "Relativized pigeonhole, 15% of options forbidden at random (22 instances, 60 s)"
+  metric: "instances refuted, with verified certificate"
+  baseline: "BreakID + Kissat 4.0.4: 0/22"
+  ours: "22/22 refuted (max 2.01 s), all certified in a separate step"
+  evidence: "TABLES.md"
+  kind: measured
+
+claims:
+  - text: "22 of 22 perturbed instances refuted within 60 s; BreakID + Kissat refutes 0 of 22."
+    kind: measured
+    evidence: ["evidence/perturbed_vs_breakid.txt", "evidence/seeds.tsv"]
+  - text: "55 of 55 instances regenerated from benchmark file-name parameters refuted; BreakID + Kissat 46 of 55 at 60 s."
+    kind: measured
+    evidence: "TABLES.md"
+  - text: "Each reported refutation is correct: its certificate is verified against the original formula."
+    kind: machine-checked
+    checker: "src/check_cert.py (independent of the rewrite, exact rational arithmetic); not a proof assistant"
+    evidence: ["evidence/cert_results.txt", "evidence/perturbed_vs_breakid.txt", "evidence/seeds.tsv"]
+    note: "Certificate files are not stored; bench/reproduce.sh regenerates and rechecks those of the 22 flagship instances."
+  - text: "The three rewrite rules preserve satisfiability for every formula."
+    kind: argued
+    evidence: "docs/soundness.md"
+  - text: "When the rewrite finds the intended pairs and cliques, the rewritten relativized pigeonhole system is infeasible as a linear program for every size. Observed on all 92 tested instances (55 + 22 + 15 reshuffles)."
+    kind: argued
+    evidence: "docs/soundness.md"
+
+links:
+  upstream:
+    - target: "Exact (gitlab.com/nonfiction-software/exact): option to drop clauses covered by a detected at-most-one"
+      state: planned
+  formal_proof: []
+
+authors:
+  - name: "Johannes Gast"
+ai_assistance: >
+  Code, experiments and text were produced by an AI agent (Claude, via Claude Code) under the
+  author's direction. Reported numbers are generated from the saved run files.
+
+prior_work:
+  - "Haken 1985: resolution lower bound for pigeonhole formulas"
+  - "Cook, Coullard, Turan 1987: cutting planes"
+  - "Biere, Le Berre, Lonca, Manthey 2014: detecting cardinality constraints in CNF"
+  - "Elffers, Nordstrom, AAAI 2020, doi:10.1609/aaai.v34i02.5508: cardinality detection in RoundingSat"
+  - "Reeves, PhD thesis, CMU 2025: cardinality constraints in SAT solving"
+  - "Green, Le Goues, Brown, arXiv:2609.14836: hyperspecialized solvers, same counting argument per family"
+  - "Devriendt et al.: BreakID symmetry breaking"
+novelty: "Combination of known parts; the robustness comparison against symmetry breaking was not found in a shallow literature screen."
+
+reproduce: "bash bench/reproduce.sh"
+
+gate:
+  soundness_tests:
+    pass: true
+    evidence: "tests/test_cardlift.py"
+  public_baseline:
+    pass: true
+    evidence: ["evidence/perturbed_vs_breakid.txt", "evidence/seeds.tsv"]
+    note: "BreakID (commit 1a022d0) + Kissat 4.0.4, 60 s including symmetry breaking."
+  one_command_reproduction:
+    pass: true
+    evidence: "evidence/reproduce_output.txt"
+  baseline_coverage:
+    pass: false
+    note: "Not run: SBVA, SATSUMA, RoundingSat with cardinality detection, Exact built with its LP solver, the family-specific solver of Green et al."
+  real_benchmark_files:
+    pass: false
+    note: "The 55 instances are regenerated with CNFgen from parameters read off the GBD file names, not the original files. Three of them carry names GBD lists as satisfiable, so at least the 2016 sub-family differs from the originals. The perturbed family is our own."
+  second_machine:
+    pass: false
+    note: "All runs on one 2-core cloud VM."
+  independent_reproduction:
+    pass: false
+    note: "Nobody other than the author has rerun it yet."
+
+limits:
+  - "60 s budgets (including symmetry-breaking time for the baseline), not the 5000 s competition protocol; no long baseline run on the 22 flagship instances."
+  - "The 55 regenerated instances are not the original benchmark files (see gate.real_benchmark_files)."
+  - "The perturbation only adds unit clauses; simplifying the formula by unit propagation before the rewrite is untested."
+  - "Instance shuffling is unseeded, so regenerated instances differ in order from the ones measured."
+  - "Adds time on formulas without the structure: k-clique 0.04 to 0.54 s in Exact; clique-colouring 24.9 to 27.2 s in Exact."
+  - "Rule 1 only matches 4-literal clauses. Among the tested families it applies to relativized pigeonhole and to Tseitin formulas, where it adds 600 variables without benefit."
+  - "Only crafted families tested; occurrence in real-world models is unmeasured."
+  - "Single machine; most timings are single runs."

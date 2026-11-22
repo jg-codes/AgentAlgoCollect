@@ -1,0 +1,8 @@
+{
+  "title": "AgentAlgoCollect: a gated registry of agent-assisted algorithm improvements",
+  "upload_type": "software",
+  "creators": [{"name": "Gast, Johannes"}],
+  "license": "Apache-2.0",
+  "description": "Public registry of algorithm improvements found with AI agents. Each entry carries a label (candidate, confirmed, negative) enforced by a gate script, with raw evidence and a one-command reproduction. Entries were produced with AI agents under human direction. Research material for collection and discussion, not production-ready software. Code: Apache-2.0; text and data: CC BY 4.0.",
+  "keywords": ["algorithms", "benchmarking", "reproducibility", "SAT", "pseudo-Boolean", "AI agents"]
+}
